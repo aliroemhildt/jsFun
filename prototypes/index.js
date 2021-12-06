@@ -14,8 +14,24 @@ const { weapons, characters } = require('./datasets/ultima');
 const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 
+/*
+setup for each problem:
 
+const result = array.prototypeMethod((params) => {
+  // code
+})
+// return result
 
+OR
+
+const functionName = () => {
+  let result = array.method((element) or object.array.method(element) => {
+    return //code
+  })
+  return result
+}
+functionName();
+*/
 
 
 // SINGLE DATASETS
@@ -30,8 +46,16 @@ const kittyPrompts = {
     const result = 'REPLACE WITH YOUR RESULT HERE';
     return result;
 
+
+
     // Annotation:
     // Write your annotation here as a comment
+    /*
+    input: array of objects, with properties name, age, color
+    output: array of strings (kitty names)
+    method:
+    */
+
   },
 
   sortByAge() {
@@ -42,6 +66,7 @@ const kittyPrompts = {
 
     // Annotation:
     // Write your annotation here as a comment
+
   },
 
   growUp() {
