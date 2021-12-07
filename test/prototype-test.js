@@ -22,11 +22,11 @@ describe("PROTOTYPES", () => {
   describe("Kitty Prompts", () => {
     it("orangeKittyNames", () => {
       const e = kittyPrompts.orangeKittyNames();
-      
+
       expect(e).to.deep.equal(["Tiger", "Snickers"])
     });
-    
-    it("sortByAge", () => {
+
+    it.only("sortByAge", () => {
       const e = kittyPrompts.sortByAge();
 
       expect(e).to.deep.equal([{
@@ -47,7 +47,7 @@ describe("PROTOTYPES", () => {
         color: "tuxedo"
       }])
     });
-    
+
     it("growUp", () => {
       const e = kittyPrompts.growUp();
 
@@ -70,7 +70,7 @@ describe("PROTOTYPES", () => {
       }])
     })
   });
-  
+
   describe("Club Prompts", () => {
     it("membersBelongingToClubs", () => {
       const e = clubPrompts.membersBelongingToClubs({
@@ -100,7 +100,7 @@ describe("PROTOTYPES", () => {
       })
     })
   });
-  
+
   describe("Mod Prompts", () => {
     it("studentsPerMod", () => {
       const e = modPrompts.studentsPerMod();
@@ -120,7 +120,7 @@ describe("PROTOTYPES", () => {
       }])
     })
   });
-  
+
   describe("Cake Prompts", () => {
     it("stockPerCake", () => {
       const e = cakePrompts.stockPerCake();
@@ -145,7 +145,7 @@ describe("PROTOTYPES", () => {
         inStock: 0
       }])
     });
-    
+
     it("onlyInStock", () => {
       const e = cakePrompts.onlyInStock();
 
@@ -175,19 +175,19 @@ describe("PROTOTYPES", () => {
         inStock: 21
       }])
     });
-    
+
     it("totalInventory", () => {
       const e = cakePrompts.totalInventory();
 
       expect(e).to.deep.equal(59)
     });
-    
+
     it("allToppings", () => {
       const e = cakePrompts.allToppings();
 
       expect(e).to.deep.equal(["dutch process cocoa", "toasted sugar", "smoked sea salt", "berries", "edible flowers", "mint", "cranberry", "crystallized ginger"])
     });
-    
+
     it("groceryList", () => {
       const e = cakePrompts.groceryList();
 
@@ -203,7 +203,7 @@ describe("PROTOTYPES", () => {
       })
     })
   });
-  
+
   describe("Class Prompts", () => {
     it("feClassrooms", () => {
       const e = classPrompts.feClassrooms();
@@ -226,7 +226,7 @@ describe("PROTOTYPES", () => {
         capacity: 29
       }])
     });
-    
+
     it("totalCapacities", () => {
       const e = classPrompts.totalCapacities();
 
@@ -235,7 +235,7 @@ describe("PROTOTYPES", () => {
         beCapacity: 96
       })
     });
-    
+
     it("sortByCapacity", () => {
       const e = classPrompts.sortByCapacity();
 
@@ -380,7 +380,7 @@ describe("PROTOTYPES", () => {
 
       expect(e).to.deep.equal(40)
     });
-    
+
     it("getBreweryBeerCount", () => {
       const e = breweryPrompts.getBreweryBeerCount();
 
@@ -401,7 +401,7 @@ describe("PROTOTYPES", () => {
         beerCount: 7
       }])
     });
-    
+
     it("findHighestAbvBeer", () => {
       const e = breweryPrompts.findHighestAbvBeer();
 
@@ -413,7 +413,7 @@ describe("PROTOTYPES", () => {
       })
     })
   });
-  
+
   describe("Turing Prompts", () => {
     it("studentsForEachInstructor", () => {
       const e = turingPrompts.studentsForEachInstructor();
@@ -447,7 +447,7 @@ describe("PROTOTYPES", () => {
         studentCount: 20
       }])
     });
-    
+
     it("studentsPerInstructor", () => {
       const e = turingPrompts.studentsPerInstructor();
 
@@ -458,7 +458,7 @@ describe("PROTOTYPES", () => {
         cohort1801: 9
       })
     });
-    
+
     it("modulesPerTeacher", () => {
       const e = turingPrompts.modulesPerTeacher();
 
@@ -474,7 +474,7 @@ describe("PROTOTYPES", () => {
         Will: [1, 2, 3, 4]
       })
     });
-    
+
     it("curriculumPerTeacher", () => {
       const e = turingPrompts.curriculumPerTeacher();
 
@@ -493,7 +493,7 @@ describe("PROTOTYPES", () => {
       })
     })
   });
-  
+
   describe("Boss Prompts", () => {
     it("bossLoyalty", () => {
       const e = bossPrompts.bossLoyalty();
@@ -510,7 +510,7 @@ describe("PROTOTYPES", () => {
       }])
     })
   });
-  
+
   describe("Astronomy Prompts", () => {
     it("starsInConstellations", () => {
       const e = astronomyPrompts.starsInConstellations();
@@ -528,7 +528,7 @@ describe("PROTOTYPES", () => {
         color: 'red'
       }])
     });
-    
+
     it("starsByColor", () => {
       const e = astronomyPrompts.starsByColor();
 
@@ -606,21 +606,21 @@ describe("PROTOTYPES", () => {
         }]
       })
     });
-    
+
     it("constellationsStarsExistIn", () => {
       const e = astronomyPrompts.constellationsStarsExistIn();
 
       expect(e).to.deep.equal(["Canis Major", "Carina", "Boötes", "Auriga", "Orion", "Lyra", "Canis Minor", "The Plow", "Orion", "The Little Dipper"])
     })
   });
-  
+
   describe("Ultima Prompts", () => {
     it("totalDamage", () => {
       const e = ultimaPrompts.totalDamage();
 
       expect(e).to.deep.equal(113)
     });
-    
+
     it("charactersByTotal", () => {
       const e = ultimaPrompts.charactersByTotal();
 
@@ -647,7 +647,7 @@ describe("PROTOTYPES", () => {
       }])
     })
   });
-  
+
   describe("Dinosaur Prompts", () => {
     it("countAwesomeDinosaurs", () => {
       const e = dinosaurPrompts.countAwesomeDinosaurs();
@@ -660,7 +660,7 @@ describe("PROTOTYPES", () => {
         'Jurassic World: Fallen Kingdom': 18
       })
     });
-    
+
     it("averageAgePerMovie", () => {
       const e = dinosaurPrompts.averageAgePerMovie();
 
@@ -680,7 +680,7 @@ describe("PROTOTYPES", () => {
         }
       })
     });
-    
+
     it("uncastActors", () => {
       const e = dinosaurPrompts.uncastActors();
 
@@ -704,7 +704,7 @@ describe("PROTOTYPES", () => {
         imdbStarMeterRating: 0
       }])
     });
-    
+
     it("actorsAgesInMovies", () => {
       const e = dinosaurPrompts.actorsAgesInMovies();
 
