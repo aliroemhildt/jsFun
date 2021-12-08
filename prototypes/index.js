@@ -101,7 +101,12 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = kitties.map(kitty => {
+      kitty.age += 2;
+      return kitty;
+    }).sort((firstKitty, secondKitty) => {
+      return secondKitty.age - firstKitty.age;
+    });
     return result;
   }
 };
@@ -110,8 +115,8 @@ const kittyPrompts = {
 // Annotation:
 /*
 input: array of kitten objects
-output: array of kitten objects, sorted by age
-method: compare the age of each kitten, return the lower age
+output: array of kitten objects, who are all 2 years older
+method: make a change to each item in array (map)
 */
 
 

@@ -42,3 +42,18 @@ Now, whenever instructors tell you to pull down changes, there are two steps:
 
 Check out [this video](https://vimeo.com/turing/review/388550182/34823726eb) if you need help!
 
+## Status
+[X] Kitty
+[] Club
+[] Mod
+[] Cake
+[] Class
+[] Book
+[] Weather
+[] National Park
+[] Brewery
+[] Turing
+[] Boss
+[] Astronomy
+[] Ultima
+[] Dinosaur
