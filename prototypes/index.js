@@ -135,6 +135,7 @@ method: make a change to each item in array (map)
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
+  // why does this take in argument in test file? 
   membersBelongingToClubs() {
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
@@ -144,11 +145,40 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = () => {
+      const allNames = clubs.reduce((acc, club) => {
+        club.members.forEach(member => {
+          if (!acc.includes(member)) {
+            acc.push(member);
+          }
+        });
+        return acc;
+      }, []);
+
+      const nameObject = allNames.reduce((acc, name) => {
+        if (!acc[name]) {
+          acc[name] = [];
+        }
+        clubs.forEach(club => {
+          club.members.forEach(member => {
+            if (member === name && !acc[name].includes(member)) {
+              acc[name].push(club.club);
+            }
+          });
+        });
+        return acc;
+      }, {});
+      console.log(nameObject);
+    };
+    return result();
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of objects, properties: club (string), memebers (array)
+    //  output: object - keys that are names of each memeber, value is array
+    //   of names of clubs that person is in
+    // 1. reduce - add each name to an array, checking for duplicates
+    // 2. map that array, look at each club and add to that person if their
+    //    name is in member list
   }
 };
 
