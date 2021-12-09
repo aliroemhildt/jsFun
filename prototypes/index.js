@@ -135,7 +135,7 @@ method: make a change to each item in array (map)
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
-  // why does this take in argument in test file? 
+  // why does this take in argument in test file?
   membersBelongingToClubs() {
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
@@ -155,6 +155,7 @@ const clubPrompts = {
         return acc;
       }, []);
 
+      // could refactor this part using object.keys to iterate over keys 
       const nameObject = allNames.reduce((acc, name) => {
         if (!acc[name]) {
           acc[name] = [];
