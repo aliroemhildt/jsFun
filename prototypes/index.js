@@ -145,44 +145,42 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = () => {
-      const allNames = clubs.reduce((acc, club) => {
+    const allNames = clubs.reduce((acc, club) => {
+      club.members.forEach(member => {
+        if (!acc.includes(member)) {
+          acc.push(member);
+        }
+      });
+      return acc;
+    }, []);
+
+    // could refactor this part using object.keys to iterate over keys maybe?
+    // try to refactor and incorporate logic from above down here, might not need to
+    const nameObject = allNames.reduce((acc, name) => {
+      if (!acc[name]) {
+        acc[name] = [];
+      }
+      clubs.forEach(club => {
         club.members.forEach(member => {
-          if (!acc.includes(member)) {
-            acc.push(member);
+          if (member === name && !acc[name].includes(member)) {
+            acc[name].push(club.club);
           }
         });
-        return acc;
-      }, []);
+      });
+      return acc;
+    }, {});
 
-      // could refactor this part using object.keys to iterate over keys 
-      const nameObject = allNames.reduce((acc, name) => {
-        if (!acc[name]) {
-          acc[name] = [];
-        }
-        clubs.forEach(club => {
-          club.members.forEach(member => {
-            if (member === name && !acc[name].includes(member)) {
-              acc[name].push(club.club);
-            }
-          });
-        });
-        return acc;
-      }, {});
-      console.log(nameObject);
-    };
-    return result();
-
-    // Annotation:
-    // input: array of objects, properties: club (string), memebers (array)
-    //  output: object - keys that are names of each memeber, value is array
-    //   of names of clubs that person is in
-    // 1. reduce - add each name to an array, checking for duplicates
-    // 2. map that array, look at each club and add to that person if their
-    //    name is in member list
+    return nameObject;
   }
 };
 
+// Annotation:
+// input: array of objects, properties: club (string), memebers (array)
+//  output: object - keys that are names of each memeber, value is array
+//   of names of clubs that person is in
+// 1. reduce - add each name to an array, checking for duplicates
+// 2. map that array, look at each club and add to that person if their
+//    name is in member list
 
 
 
@@ -211,11 +209,19 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = mods.map(currMod => {
+      let newInfo = {
+        mod: currMod.mod,
+          studentsPerInstructor: currMod.students / currMod.instructors
+        };
+      return newInfo;
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: none, working with array of objects, keys: mod, students, instructors
+    // output: array of objects, with keys: mod, studentsPerInstructor
+    // method: map, change each object before returning
   }
 };
 
