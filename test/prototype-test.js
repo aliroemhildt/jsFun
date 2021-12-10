@@ -102,7 +102,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Mod Prompts", () => {
-    it.only("studentsPerMod", () => {
+    it("studentsPerMod", () => {
       const e = modPrompts.studentsPerMod();
 
       expect(e).to.deep.equal([{
@@ -188,7 +188,7 @@ describe("PROTOTYPES", () => {
       expect(e).to.deep.equal(["dutch process cocoa", "toasted sugar", "smoked sea salt", "berries", "edible flowers", "mint", "cranberry", "crystallized ginger"])
     });
 
-    it("groceryList", () => {
+    it.only("groceryList", () => {
       const e = cakePrompts.groceryList();
 
       expect(e).to.deep.equal({

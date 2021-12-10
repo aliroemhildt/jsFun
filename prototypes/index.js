@@ -252,11 +252,18 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(cake => {
+      return {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock
+      };
+    });
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of cake objects
+    // output: array of objects, with keys: flavor and inStock
+    // method: map through cakes, return a new object that only has flavor and inStock keys
   },
 
   onlyInStock() {
@@ -321,11 +328,25 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((groceryList, cake) => {
+      cake.toppings.forEach(topping => {
+        if (!groceryList[topping]) {
+          groceryList[topping] = 0;
+        };
+        groceryList[topping] += 1;
+      });
+      return groceryList;
+    }, {});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of cake objects
+    // output: one object with a key for each topping, assigned to the value of amount of topping needed
+    // method:
+    // iterate through cakes, look at toppings list
+    // for each topping, add it to the list if it's not already in there
+    // increase its count by one
   }
 };
 
@@ -725,21 +746,39 @@ const turingPrompts = {
 
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
-  bossLoyalty() {
+  //bossLoyalty() {
     // Create an array of objects that each have the name of the boss and the sum
     // loyalty of all their sidekicks. e.g.:
     // [
     //   { bossName: 'Jafar', sidekickLoyalty: 3 },
     //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
-    // ]
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    // // ]
+    // let bossesArr = Object.keys(bosses).map(bossName => {
+    //
+    //   }
+    // })
+    //
+    // const result = bossesArr.map(boss => {
+    //   let totalLoyalty = boss.sidekicks.reduce((acc, sidekick) => {
+    //     acc += sidekick.loyaltyToBoss;
+    //     return acc;
+    //   });
+    //   return newBoss = {
+    //     bossName: boss.name,
+    //     sidekickLoyalty: totalLoyalty
+    //   };
+    // });
+    //return result;
 
     // Annotation:
-    // Write your annotation here as a comment
-  }
+    // input: object of bosses and array of sidekick objects
+    // output: array of object with keys: bossName, sidekickLoyalty
+    // method:
+    // iterate through boss names, look at sidekick names
+    //    reduce sidekicknames to get total loyalty number
+    //      return total for each bossName
+//  }
 };
 
 
