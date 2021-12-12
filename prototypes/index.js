@@ -14,6 +14,9 @@ const { weapons, characters } = require('./datasets/ultima');
 const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 
+// ===========================================================
+// NOTES
+// ===========================================================
 /*
 setup for each problem:
 
@@ -34,8 +37,9 @@ functionName();
 */
 
 
+// ===========================================================
 // SINGLE DATASETS
-// =================================================================
+// ===========================================================
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
@@ -108,94 +112,59 @@ const kittyPrompts = {
       return secondKitty.age - firstKitty.age;
     });
     return result;
+
+
+
+    // Annotation:
+    /*
+    input: array of kitten objects
+    output: array of kitten objects, who are all 2 years older
+    method: make a change to each item in array (map)
+    */
   }
 };
 
-
-// Annotation:
-/*
-input: array of kitten objects
-output: array of kitten objects, who are all 2 years older
-method: make a change to each item in array (map)
-*/
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: clubs from ./datasets/clubs
 const clubPrompts = {
   // why does this take in argument in test file?
+
+  // Create an object whose keys are the names of people, and whose values are
+  // arrays that include the names of the clubs that person is a part of. e.g.
+  // {
+  //   Louisa: ['Drama', 'Art'],
+  //   Pam: ['Drama', 'Art', 'Chess'],
+  //   ...etc
+  // }
+
   membersBelongingToClubs() {
-    // Create an object whose keys are the names of people, and whose values are
-    // arrays that include the names of the clubs that person is a part of. e.g.
-    // {
-    //   Louisa: ['Drama', 'Art'],
-    //   Pam: ['Drama', 'Art', 'Chess'],
-    //   ...etc
-    // }
 
-    const allNames = clubs.reduce((acc, club) => {
-      club.members.forEach(member => {
-        if (!acc.includes(member)) {
-          acc.push(member);
+    const result = clubs.reduce((acc, club, index) => {
+      club.members.forEach(name => {
+        if (!acc[name]) {
+          acc[name] = [];
         }
-      });
-      return acc;
-    }, []);
-
-    // could refactor this part using object.keys to iterate over keys maybe?
-    // try to refactor and incorporate logic from above down here, might not need to
-    const nameObject = allNames.reduce((acc, name) => {
-      if (!acc[name]) {
-        acc[name] = [];
-      }
-      clubs.forEach(club => {
-        club.members.forEach(member => {
-          if (member === name && !acc[name].includes(member)) {
-            acc[name].push(club.club);
-          }
-        });
+        if (!acc[name].includes(club.club)) {
+          acc[name].push(club.club);
+        }
       });
       return acc;
     }, {});
 
-    return nameObject;
+    return result;
+
+    // Annotation:
+    // input: array of objects, properties: club (string), memebers (array)
+    //  output: object - keys that are names of each memeber, value is array
+    //   of names of clubs that person is in
+    // 1. reduce - add each name to an array, checking for duplicates
+    // 2. map that array, look at each club and add to that person if their
+    //    name is in member list
   }
 };
 
-// Annotation:
-// input: array of objects, properties: club (string), memebers (array)
-//  output: object - keys that are names of each memeber, value is array
-//   of names of clubs that person is in
-// 1. reduce - add each name to an array, checking for duplicates
-// 2. map that array, look at each club and add to that person if their
-//    name is in member list
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: mods from ./datasets/mods
 const modPrompts = {
@@ -212,7 +181,7 @@ const modPrompts = {
     const result = mods.map(currMod => {
       let newInfo = {
         mod: currMod.mod,
-          studentsPerInstructor: currMod.students / currMod.instructors
+        studentsPerInstructor: currMod.students / currMod.instructors
         };
       return newInfo;
     });
@@ -225,24 +194,11 @@ const modPrompts = {
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
+
   stockPerCake() {
     // Return an array of objects that include just the flavor of the cake and how
     // much of that cake is in stock e.g.
@@ -258,6 +214,7 @@ const cakePrompts = {
         inStock: cake.inStock
       };
     });
+
     return result;
 
     // Annotation:
@@ -332,7 +289,7 @@ const cakePrompts = {
       cake.toppings.forEach(topping => {
         if (!groceryList[topping]) {
           groceryList[topping] = 0;
-        };
+        }
         groceryList[topping] += 1;
       });
       return groceryList;
@@ -350,21 +307,7 @@ const cakePrompts = {
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: classrooms from ./datasets/classrooms
 const classPrompts = {
@@ -410,14 +353,9 @@ const classPrompts = {
   }
 };
 
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------
 
 // DATASET: books from './datasets/books
-
 const bookPrompts = {
   removeViolence() {
     // return an array of all book titles that are not horror or true crime. Eg:
@@ -453,15 +391,9 @@ const bookPrompts = {
 
 };
 
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
+// -----------------------------------------------------------
 
 // DATASET: weather from './datasets/weather
-
 const weatherPrompts = {
   getAverageTemps() {
     // return an array of all the average temperatures. Eg:
@@ -506,15 +438,9 @@ const weatherPrompts = {
   }
 };
 
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
+// -----------------------------------------------------------
 
 // DATASET: nationalParks from ./datasets/nationalParks
-
 const nationalParksPrompts = {
   getParkVisitList() {
     /// Return an object containing the names of which parks I need to visit
@@ -572,18 +498,7 @@ const nationalParksPrompts = {
   }
 };
 
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: breweries from ./datasets/breweries
 const breweryPrompts = {
@@ -628,34 +543,9 @@ const breweryPrompts = {
 };
 
 
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
+// ===========================================================
 // DOUBLE DATASETS
-// =================================================================
+// ===========================================================
 
 // DATASET: instructors, cohorts from ./datasets/turing
 const turingPrompts = {
@@ -728,25 +618,14 @@ const turingPrompts = {
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
-  //bossLoyalty() {
+  bossLoyalty() {
+    const result = '';
+    return result;
+
     // Create an array of objects that each have the name of the boss and the sum
     // loyalty of all their sidekicks. e.g.:
     // [
@@ -778,24 +657,10 @@ const bossPrompts = {
     // iterate through boss names, look at sidekick names
     //    reduce sidekicknames to get total loyalty number
     //      return total for each bossName
-//  }
+  }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: constellations, stars } from ./datasets/astronomy
 const astronomyPrompts = {
@@ -863,21 +728,7 @@ const astronomyPrompts = {
   }
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: charaters, weapons from ./datasets/ultima
 const ultimaPrompts = {
@@ -906,21 +757,7 @@ const ultimaPrompts = {
   },
 };
 
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+// -----------------------------------------------------------
 
 // DATASET: dinosaurs, humans, movies from ./datasets/dinosaurs
 const dinosaurPrompts = {
@@ -1031,6 +868,9 @@ const dinosaurPrompts = {
     // Write your annotation here as a comment
   }
 };
+
+// -----------------------------------------------------------
+
 
 module.exports = {
   breweryPrompts,

@@ -44,7 +44,7 @@ Check out [this video](https://vimeo.com/turing/review/388550182/34823726eb) if 
 
 ## Status
 [X] Kitty
-[] Club
+[X] Club
 [] Mod
 [] Cake
 [] Class
