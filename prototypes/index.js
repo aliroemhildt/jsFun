@@ -182,7 +182,7 @@ const modPrompts = {
       let newInfo = {
         mod: currMod.mod,
         studentsPerInstructor: currMod.students / currMod.instructors
-        };
+      };
       return newInfo;
     });
     return result;
