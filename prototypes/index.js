@@ -346,11 +346,16 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.filter(classroom => {
+      return classroom.program === 'FE';
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of classroom objects, with properties: roomLetter, program, cpacity
+    // output: array of classroom objects, only the ones with a program value of 'FE'
+    // method: filter, only return a classroom if its program property is equal to 'FE'
   },
 
   totalCapacities() {
@@ -361,21 +366,41 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.reduce((totalCapacity, classroom) => {
+      if (classroom.program === 'FE') {
+        totalCapacity.feCapacity += classroom.capacity;
+      } else {
+        totalCapacity.beCapacity += classroom.capacity;
+      }
+      return totalCapacity;
+    }, {feCapacity: 0, beCapacity: 0});
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of classroom objects, with properties: roomLetter, program, capacity
+    // output: object, with keys feCapacity and beCapacity, where value is total capacity for each program
+    // method: reduce
+    //    acc will be an object with keys feCapacity and beCapacity
+    //    for each classroom:
+    //        check value of program
+    //        add capacity to the corresponding key of the acc
   },
 
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((classroom1, classroom2) => {
+      // need to google how the return statement of this method works
+      return classroom1.capacity - classroom2.capacity;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of classroom objects
+    // output: array of classroom objects, sorted by value of capcity key
+    // method: sort, when comparing two classes, return the one with the smaller capacity value
   }
 };
 
