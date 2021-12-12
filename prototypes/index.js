@@ -418,11 +418,22 @@ const bookPrompts = {
     //   'Catch-22', 'Treasure Island']
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((acc, book) => {
+      if (book.genre !== 'Horror' && book.genre !== 'True Crime') {
+        acc.push(book.title);
+      }
+      return acc;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of book objects, with properties title, author, genre, published
+    // output: array of book titles, only the books with genre values that are not horror or true crime
+    // method: reduce
+    //    acc will be an empty array
+    //    check book.genre
+    //    if book.genre is not horror or true crime, add book.title to acc
 
   },
   getNewBooks() {
