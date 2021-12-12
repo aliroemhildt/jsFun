@@ -244,22 +244,35 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => {
+      return cake.inStock > 0;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of cake objects, with properties: cakeFlavor, filling, frosting, toppings, inStock
+    // output: array of only the cake objects that are in stock
+    // method: filter, only return cake objects if their inStock value is greater than 0
   },
 
   totalInventory() {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((totalCakes, cake) => {
+      totalCakes += cake.inStock;
+      return totalCakes;
+    }, 0);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of cake objects
+    // output: number, total number of cakes in stock
+    // method: reduce
+    //  acc will start at 0
+    //  for each cake, add the inStock value to the acc
   },
 
   allToppings() {
@@ -267,11 +280,24 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((allToppings, cake) => {
+      cake.toppings.forEach(topping => {
+        if (!allToppings.includes(topping)) {
+          allToppings.push(topping);
+        }
+      });
+      return allToppings;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of cake objects
+    // output: array of ingredient names, no duplicates
+    // method: reduce
+    //    acc will be an empty array
+    //    for each topping:
+    //      add to acc if it is not already in there
   },
 
   groceryList() {
