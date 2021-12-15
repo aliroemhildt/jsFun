@@ -436,6 +436,7 @@ const bookPrompts = {
     //    if book.genre is not horror or true crime, add book.title to acc
 
   },
+  
   getNewBooks() {
     // return an array of objects containing all books that were
     // published in the 90's and 00's. Inlucde the title and the year Eg:
@@ -444,13 +445,22 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.reduce((acc, book) => {
+      if (book.published, book.published >= 1990 && book.published <= 2009) {
+        const newBook = {title: book.title, year: book.published};
+        acc.push(newBook);
+      }
+      return acc;
+    }, []);
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of book objects
+    // output: array of only the books with year value 1990-2009
+    //    objects in returned array should have keys title and year
+    // method: redue - we want an array of a different length (filter) and we want to change the objects (map)
   }
-
 };
 
 // -----------------------------------------------------------
