@@ -436,7 +436,7 @@ const bookPrompts = {
     //    if book.genre is not horror or true crime, add book.title to acc
 
   },
-  
+
   getNewBooks() {
     // return an array of objects containing all books that were
     // published in the 90's and 00's. Inlucde the title and the year Eg:
@@ -471,11 +471,16 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.map(weatherInfo => {
+      return (weatherInfo.temperature.low + weatherInfo.temperature.high) / 2;
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of weather objects
+    // output: array of average temperatures
+    // method: map - we want to return the avg temp of each object, not the entire object
   },
 
   findSunnySpots() {
@@ -485,11 +490,19 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.reduce((acc, weatherInfo) => {
+      if (weatherInfo.type.includes('sunny')) {
+        const message = `${weatherInfo.location} is ${weatherInfo.type}.`;
+        acc.push(message);
+      }
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of weather objects
+    // output: array of only objects with type keys that include sunny, returning a string that interpolates the info
+    // method: reduce -> filtering through an array, but returning something new instead of the exact object
   },
 
   findHighestHumidity() {
@@ -501,12 +514,16 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = weather.sort((a, b) => {
+      return b.humidity - a.humidity;
+    });
+    return result[0];
 
     // Annotation:
-    // Write your annotation here as a comment
-
+    // input: array of weather objects
+    // output: single weather object
+    // use sort to list humidity from hightest to lowest
+    // return the first item
   }
 };
 

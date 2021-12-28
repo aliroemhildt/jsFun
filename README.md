@@ -49,7 +49,7 @@ Check out [this video](https://vimeo.com/turing/review/388550182/34823726eb) if 
 [X] Cake
 [X] Class
 [X] Book
-[] Weather
+[X] Weather
 [] National Park
 [] Brewery
 [] Turing

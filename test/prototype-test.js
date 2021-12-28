@@ -295,7 +295,7 @@ describe("PROTOTYPES", () => {
         'Treasure Island'])
     });
 
-    it.only("getNewBooks", () => {
+    it("getNewBooks", () => {
       const e = bookPrompts.getNewBooks();
 
       expect(e).to.deep.equal([{
