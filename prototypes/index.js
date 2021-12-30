@@ -630,11 +630,20 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+      brewery.beers.forEach(beer => {
+        acc++;
+      });
+      return acc;
+    }, 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of brewery objects - with key beers (array of beer objects)
+    // output: number - total number of beers accross all breweries
+    // method:
+    //    reduce over breweries
+    //    for each item in beers array, add 1 to acc
   },
 
   getBreweryBeerCount() {
@@ -646,11 +655,23 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, brewery) => {
+      let beerCount = 0;
+      brewery.beers.forEach(beer => {
+        beerCount++;
+      });
+      acc.push({name: brewery.name, beerCount: beerCount});
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of brewery objects - with keys name (string), beers (array of objects)
+    // method:
+    //    reduce over breweries, acc is empty array
+    //    for each brewery:
+    //        create beerCount var, add 1 for each item in beer array (forEach)
+    //        add an object to acc - {name, beerCount}
   },
 
   findHighestAbvBeer() {
@@ -658,11 +679,23 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = breweries.reduce((acc, brewery) => {
+      brewery.beers.forEach(beer => {
+        acc.push(beer);
+      });
+      return acc;
+    }, []).sort((a, b) => {
+      return b.abv - a.abv;
+    });
+    return result[0];
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of brewery objects - with key beers (array of beer objects), each with key abv (number)
+    // output: the beer object with the highest abv
+    // method:
+    //    reduce over breweries, add each beer object to acc
+    //    sort array of beers by abv (highest to lowest: <)
+    //    return the first item in the list of sorted beers
   }
 };
 
