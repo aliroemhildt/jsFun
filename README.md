@@ -50,7 +50,7 @@ Check out [this video](https://vimeo.com/turing/review/388550182/34823726eb) if 
 [X] Class
 [X] Book
 [X] Weather
-[] National Park
+[X] National Park
 [] Brewery
 [] Turing
 [] Boss

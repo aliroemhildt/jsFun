@@ -539,11 +539,25 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+      if (park.visited) {
+        acc.parksVisited.push(park.name);
+      } else {
+        acc.parksToVisit.push(park.name);
+      }
+      return acc;
+    }, {parksVisited: [], parksToVisit: []});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of park objects, key vistited (boolean)
+    // output: object with parksToVisit and parksVisited - arrays of park names
+    // method:
+    // reducde over nationalParks
+    // acc is an object with parksToVisit and parksVisited - empty arrays
+    // for each park object: check visited value
+    // if true: add to acc.parksVisited
+    // if false: add to acc.parksToVisit
   },
 
   getParkInEachState() {
@@ -556,11 +570,20 @@ const nationalParksPrompts = {
     // { Florida: 'Everglades' } ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+      acc.push({[park.location]: park.name});
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of park objects
+    // output: array of objects - key = state, value = park name
+    // method:
+    //    reduce over nationalParks
+    //    add a new object to acc for each park
+    //    this will work for the data give, but this fn is not checking for
+    //      duplicates of states or park names
   },
 
   getParkActivities() {
@@ -579,11 +602,23 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, park) => {
+      park.activities.forEach(activity => {
+        if (!acc.includes(activity)) {
+          acc.push(activity);
+        }
+      });
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: array of park objects, with key activites - array of strings
+    // output: array of all activites, no duplicates
+    // method:
+    //    reduce over nationaParks array
+    //    look at each activity for a park (forEach)
+    //    if the acc does not include the activity, add it
   }
 };
 
