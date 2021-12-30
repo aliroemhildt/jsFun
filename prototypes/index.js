@@ -714,11 +714,26 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc, instructor) => {
+      let cohort = cohorts.find(cohort => {
+        return cohort.module === instructor.module;
+      });
+      acc.push({name: instructor.name, studentCount: cohort.studentCount});
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input:
+    //    array of instructor objects (with key 'name' and 'module')
+    //    array of cohort objects (with key 'module' and 'studentCount')
+    // output: array of objects with key for instructor name and the num of students in their mod
+    // method:
+    //    reduce over instructor array
+    //    add an object to acc {name: instructor.name, studentCount: 0}
+    //    use the mod tied to that teacher to find the object in the cohort array with the same mod - store in var
+    //    use the mod var to add mod.studentCount to the studentCount of the new object
+    //    add new object to acc
   },
 
   studentsPerInstructor() {
@@ -728,11 +743,18 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((acc, cohort) => {
+      
+    })
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: instructor array (key: module), cohort array (keys: module, studentCount)
+    // output: object with keys for each cohort and the number of students per teacher in each
+    // method:
+    //    reduce through cohort array (acc is empty object)
+    //        create var for teacher count (numTeachers) - filter through instructor array using module number
+    //        add a new key ('cohort'+cohort.cohort) with value of students per instructor (studentCount/numTeachers)
   },
 
   modulesPerTeacher() {

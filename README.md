@@ -51,7 +51,7 @@ Check out [this video](https://vimeo.com/turing/review/388550182/34823726eb) if 
 [X] Book
 [X] Weather
 [X] National Park
-[] Brewery
+[X] Brewery
 [] Turing
 [] Boss
 [] Astronomy
