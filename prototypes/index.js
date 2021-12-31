@@ -743,9 +743,17 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = cohorts.reduce((acc, cohort) => {
-      
-    })
+    const result = cohorts.reduce((cohortInfo, cohort) => {
+      const teachers = instructors.reduce((numTeachers, instructor) => {
+        if (instructor.module === cohort.module) {
+          numTeachers++;
+        }
+        return numTeachers;
+      }, 0);
+      cohortInfo[`cohort${cohort.cohort}`] = cohort.studentCount / teachers;
+      return cohortInfo;
+    }, {})
+    console.log(result);
     return result;
 
     // Annotation:
