@@ -916,11 +916,33 @@ const astronomyPrompts = {
     //     color: 'red' }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const constellationKeys = Object.keys(constellations);
+
+    const starsInConstellations = constellationKeys.reduce((acc, constellation) => {
+      constellations[constellation].stars.forEach(star => {
+        if (!acc.includes(star)) {
+          acc.push(star);
+        }
+      });
+      return acc;
+    }, []);
+
+    const result = stars.filter(star => {
+      return starsInConstellations.includes(star.name);
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: constellations object, stars array
+    // output: array of star objects if the star is listed in a constellation
+    // method:
+    //    create array of constellation keys
+    //    reduce over constellation keys - acc is array of star names
+    //    filter over stars, return if name is included in star names
+
+
+
   },
 
   starsByColor() {
