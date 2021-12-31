@@ -752,7 +752,7 @@ const turingPrompts = {
       }, 0);
       cohortInfo[`cohort${cohort.cohort}`] = cohort.studentCount / teachers;
       return cohortInfo;
-    }, {})
+    }, {});
     console.log(result);
     return result;
 
@@ -780,11 +780,33 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc, instructor) => {
+      acc[instructor.name] = [];
+      instructor.teaches.forEach(subject => {
+        cohorts.forEach(cohort => {
+          if (cohort.curriculum.includes(subject) && !acc[instructor.name].includes(cohort.module)) {
+            acc[instructor.name].push(cohort.module);
+          }
+        });
+        acc[instructor.name].sort((a, b) => {
+          return a - b;
+        });
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input:
+    //    instructor array - keys: module, teaches
+    //    cohort array - keys: module, curriculum
+    // output: object with instructor name keys, and array of modules they teach for values
+    // method:
+    //    reduce over instructors array (acc is {})
+    //    add their name with empty array to acc
+    //    iterate through teaches
+    //        for each subject, iterate through cohorts
+    //        if its in curriculum, add module to acc
   },
 
   curriculumPerTeacher() {
@@ -797,11 +819,38 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((acc, cohort) => {
+      cohort.curriculum.forEach(subject => {
+        if (!acc[subject]) {
+          acc[subject] = [];
+        }
+      });
+      return acc;
+    }, {});
+
+    instructors.forEach(instructor => {
+      instructor.teaches.forEach(subject => {
+        if (!result[subject].includes(instructor.name)) {
+          result[subject].push(instructor.name);
+        }
+      });
+    });
+
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input:
+    //    instructor array - keys: name, teaches
+    //    cohorts array - keys: curriculum
+    // output: object - keys: curriculum topic,
+    //                  values: instructors that teach it
+    // method:
+    //    reduce over cohorts array - acc is {}
+    //    iterate through cohort.curriculum array
+    //        if acc[subject] does not exist, add it to acc with value []
+    //    iterate through instructors array
+    //        if instructor.teaches includes acc[subject]:
+    //        add instructor to acc[subject] array
   }
 };
 
