@@ -859,8 +859,6 @@ const turingPrompts = {
 // DATASET: bosses, sidekicks from ./datasets/bosses
 const bossPrompts = {
   bossLoyalty() {
-    const result = '';
-    return result;
 
     // Create an array of objects that each have the name of the boss and the sum
     // loyalty of all their sidekicks. e.g.:
@@ -868,31 +866,33 @@ const bossPrompts = {
     //   { bossName: 'Jafar', sidekickLoyalty: 3 },
     //   { bossName: 'Ursula', sidekickLoyalty: 20 },
     //   { bossName: 'Scar', sidekickLoyalty: 16 }
-    // // ]
-    // let bossesArr = Object.keys(bosses).map(bossName => {
-    //
-    //   }
-    // })
-    //
-    // const result = bossesArr.map(boss => {
-    //   let totalLoyalty = boss.sidekicks.reduce((acc, sidekick) => {
-    //     acc += sidekick.loyaltyToBoss;
-    //     return acc;
-    //   });
-    //   return newBoss = {
-    //     bossName: boss.name,
-    //     sidekickLoyalty: totalLoyalty
-    //   };
-    // });
-    //return result;
+    // ]
+
+    const bossNames = Object.keys(bosses);
+
+    const result = bossNames.reduce((acc, name) => {
+      let bossInfo = {bossName: bosses[name].name, sidekickLoyalty: 0};
+      sidekicks.forEach(sidekick => {
+        if (sidekick.boss === bossInfo.bossName) {
+          bossInfo.sidekickLoyalty += sidekick.loyaltyToBoss;
+        }
+      });
+      acc.push(bossInfo);
+      return acc;
+    }, []);
+
+    return result;
 
     // Annotation:
-    // input: object of bosses and array of sidekick objects
-    // output: array of object with keys: bossName, sidekickLoyalty
+    // input: bosses object with sub-objects, sidekicks array
+    // output: array of objects - keys: bossName, sidekickLoyalty
     // method:
-    // iterate through boss names, look at sidekick names
-    //    reduce sidekicknames to get total loyalty number
-    //      return total for each bossName
+    //    use object keys to get array of boss names
+    //    reduce over boss names - acc is []
+    //        for each name, add an object to the acc
+    //        {bossName: name, sidekickLoyalty: 0}
+    //    iterate over sidekicks
+    //        add loyaltyToBoss to result[sidekick.boss]
   }
 };
 
