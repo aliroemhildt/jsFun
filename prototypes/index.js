@@ -956,11 +956,23 @@ const astronomyPrompts = {
     //   red: [{obj}]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.reduce((acc, star) => {
+      if (!acc[star.color]) {
+        acc[star.color] = [];
+      }
+      acc[star.color].push(star);
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: stars arrays
+    // output: object - keys of star colors, value of star objects that are that color
+    // method:
+    //    - reduce over stars, acc is object
+    //    - if the color is not a key in the obj, add it
+    //    with value of []
+    //    - add that star to the matching color
   },
 
   constellationsStarsExistIn() {
@@ -982,7 +994,10 @@ const astronomyPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: constellation object, stars array
+    // output: array of constellation names
+    // method:
+    //
   }
 };
 
