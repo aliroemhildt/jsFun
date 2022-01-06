@@ -788,10 +788,8 @@ const turingPrompts = {
             acc[instructor.name].push(cohort.module);
           }
         });
-        acc[instructor.name].sort((a, b) => {
-          return a - b;
-        });
       });
+      acc[instructor.name].sort();
       return acc;
     }, {});
     return result;
@@ -830,9 +828,7 @@ const turingPrompts = {
 
     instructors.forEach(instructor => {
       instructor.teaches.forEach(subject => {
-        if (!result[subject].includes(instructor.name)) {
           result[subject].push(instructor.name);
-        }
       });
     });
 
@@ -847,7 +843,7 @@ const turingPrompts = {
     // method:
     //    reduce over cohorts array - acc is {}
     //    iterate through cohort.curriculum array
-    //        if acc[subject] does not exist, add it to acc with value []
+    //        if acc[subject] does not exist, add it to acc with value //        []
     //    iterate through instructors array
     //        if instructor.teaches includes acc[subject]:
     //        add instructor to acc[subject] array
@@ -990,7 +986,14 @@ const astronomyPrompts = {
     //    "The Little Dipper" ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = stars.sort((a, b) => {
+      return a.visualMagnitude - b.visualMagnitude;
+    }).reduce((acc, star) => {
+      if (star.constellation) {
+        acc.push(star.constellation);
+      }
+      return acc;
+    }, []);
     return result;
 
     // Annotation:

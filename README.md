@@ -54,6 +54,6 @@ Check out [this video](https://vimeo.com/turing/review/388550182/34823726eb) if 
 [X] Brewery
 [X] Turing
 [X] Boss
-[] Astronomy
+[X] Astronomy
 [] Ultima
 [] Dinosaur

@@ -475,7 +475,7 @@ describe("PROTOTYPES", () => {
       })
     });
 
-    it("curriculumPerTeacher", () => {
+    it.only("curriculumPerTeacher", () => {
       const e = turingPrompts.curriculumPerTeacher();
 
       expect(e).to.deep.equal({
@@ -607,7 +607,7 @@ describe("PROTOTYPES", () => {
       })
     });
 
-    it.only("constellationsStarsExistIn", () => {
+    it("constellationsStarsExistIn", () => {
       const e = astronomyPrompts.constellationsStarsExistIn();
 
       expect(e).to.deep.equal(["Canis Major", "Carina", "Boötes", "Auriga", "Orion", "Lyra", "Canis Minor", "The Plow", "Orion", "The Little Dipper"])
