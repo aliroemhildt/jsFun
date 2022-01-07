@@ -1077,11 +1077,25 @@ const dinosaurPrompts = {
     //   'Jurassic World: Fallen Kingdom': 18
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = movies.reduce((acc, movie) => {
+      acc[movie.title] = 0;
+      movie.dinos.forEach(dino => {
+        if (dinosaurs[dino].isAwesome) {
+          acc[movie.title]++;
+        }
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: dinosaurs object, humans object, movies arrays
+    // output: object with movie title keys, num of dinos value
+    // method:
+    // redue over movies, acc = {}
+    // add each movie title to acc with value 0
+    // for each dino in dinos array:
+    //    if dinosaurs[dino].isAwesome is true, add 1 to acc
   },
 
   averageAgePerMovie() {
@@ -1110,11 +1124,27 @@ const dinosaurPrompts = {
       }
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = movies.reduce((acc, movie) => {
+      if (!acc[movie.director]) {
+        acc[movie.director] = {};
+      }
+      acc[movie.director][movie.title] = 0;
+      movie.cast.forEach(name => {
+        acc[movie.direcotr][movie.title] += (movie.yearReleased - humans[name].yearBorn);
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // output: obj with keys of movie directors --> obj with key for each movie, each with value of avg age of cast
+    // method:
+    // reduce over movies
+    // if move director is not a key yet:
+    //    add obj to acc with key of dir. name and value {}
+    // acc[movie.director][movie.title] = 0
+    // movie.cast.forEach:
+    //    acc[movie.director][movie.title] += movie.yearReleased - humans[casMemeber].yearBorn
   },
 
   uncastActors() {
