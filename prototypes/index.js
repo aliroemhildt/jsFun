@@ -828,7 +828,7 @@ const turingPrompts = {
 
     instructors.forEach(instructor => {
       instructor.teaches.forEach(subject => {
-          result[subject].push(instructor.name);
+        result[subject].push(instructor.name);
       });
     });
 
@@ -1013,7 +1013,12 @@ const ultimaPrompts = {
     // Return the sum of the amount of damage for all the weapons that our characters can use
     // Answer => 113
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = characters.reduce((acc, character) => {
+      character.weapons.forEach(weapon => {
+        acc += weapons[weapon].damage;
+      });
+      return acc;
+    }, 0);
     return result;
 
     // Annotation:
@@ -1021,21 +1026,40 @@ const ultimaPrompts = {
     //        weapons array - keys: weapon objects with damage keys
     // output: sum of damage (number)
     // method:
-    // reduce over characters array
-    // 
+    // reduce over characters array, acc is 0
+    // for each weapon:
+    //    ac += weapons[weapon].damage
   },
 
   charactersByTotal() {
 
     // Return the sum damage and total range for each character as an object.
-    // ex: [ { Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}
+    // ex: [ Avatar: { damage: 27, range: 24 }, { Iolo: {...}, ...}]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = characters.reduce((acc, character) => {
+      charDamage = 0;
+      charRange = 0;
+      character.weapons.forEach(weapon => {
+        charDamage += weapons[weapon].damage;
+        charRange += weapons[weapon].range;
+      });
+      const info = {
+        [character.name]: {
+          damage: charDamage,
+          range: charRange
+        }
+      };
+      acc.push(info);
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
-  },
+    // reduce through characters, acc is []
+    // calculate damge and range totals
+    // push obj to acc with character name key assigned to obj
+    //    with keys damage and range
+  }
 };
 
 // -----------------------------------------------------------
