@@ -475,7 +475,7 @@ describe("PROTOTYPES", () => {
       })
     });
 
-    it.only("curriculumPerTeacher", () => {
+    it("curriculumPerTeacher", () => {
       const e = turingPrompts.curriculumPerTeacher();
 
       expect(e).to.deep.equal({
@@ -615,7 +615,7 @@ describe("PROTOTYPES", () => {
   });
 
   describe("Ultima Prompts", () => {
-    it("totalDamage", () => {
+    it.only("totalDamage", () => {
       const e = ultimaPrompts.totalDamage();
 
       expect(e).to.deep.equal(113)

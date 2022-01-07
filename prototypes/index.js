@@ -1017,7 +1017,12 @@ const ultimaPrompts = {
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // input: characters array - keys: weapons (array)
+    //        weapons array - keys: weapon objects with damage keys
+    // output: sum of damage (number)
+    // method:
+    // reduce over characters array
+    // 
   },
 
   charactersByTotal() {
