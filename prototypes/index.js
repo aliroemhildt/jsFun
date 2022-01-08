@@ -1128,10 +1128,15 @@ const dinosaurPrompts = {
       if (!acc[movie.director]) {
         acc[movie.director] = {};
       }
+
       acc[movie.director][movie.title] = 0;
+      let totalAge = 0;
+
       movie.cast.forEach(name => {
-        acc[movie.direcotr][movie.title] += (movie.yearReleased - humans[name].yearBorn);
+        totalAge += ((movie.yearReleased - humans[name].yearBorn));
       });
+
+      acc[movie.director][movie.title] = Math.floor(totalAge / movie.cast.length);
       return acc;
     }, {});
     return result;
@@ -1172,12 +1177,34 @@ const dinosaurPrompts = {
         imdbStarMeterRating: 0
       }]
     */
+    const names = Object.keys(humans);
+    const nonJPNames = names.filter(name => {
+      const castJP =  
+      return (!)
+    })
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    const result = humanNames.reduce((acc, name) => {
+      if (!acc.includes(humans[name])) {
+        acc.push({
+          name: name,
+          nationality: humans[name].nationality,
+          imdbStarMeterRating: humans[name].imdbStarMeterRating
+        });
+      }
+      return acc;
+    }, []);
+    return result.sort((a, b) => {
+      return a.nationality.toLowerCase().localeCompare(b.nationality.toLowerCase());
+    });
 
     // Annotation:
-    // Write your annotation here as a comment
+    // output: array of objects with keys: name, nationality, imdbStarMeterRating
+    // method:
+    // Object.keys(human) --> get array of humanNames
+    // iterate through human names and remove if it is listed in a JP movie
+    // humanNames.reduce, acc is []
+    //    add obj for that human to acc
+    // sort acc by nationality key
   },
 
   actorsAgesInMovies() {
@@ -1196,11 +1223,23 @@ const dinosaurPrompts = {
       { name: 'Bryce Dallas Howard', ages: [ 34, 37 ] } ]
     */
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = movies.reduce((acc, movie) => {
+      movie.cast.forEach(person => {
+        if (!acc[person]) {
+          acc[person] = {name: person, ages: []};
+        }
+      });
+      console.log(acc);
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // reduce over movies, acc is []
+    // movie.cast.forEach:
+    //    if that name is not in acc, add it with value of empty array
+    //    acc[name].push (movie year - human age)
+    //    acc[name].sort((a,b) => a - b)
   }
 };
 
