@@ -1178,24 +1178,41 @@ const dinosaurPrompts = {
       }]
     */
     const names = Object.keys(humans);
-    const nonJPNames = names.filter(name => {
-      const castJP =  
-      return (!)
-    })
-
-    const result = humanNames.reduce((acc, name) => {
-      if (!acc.includes(humans[name])) {
+    const castJP =  movies.reduce((acc, movie) => {
+      movie.cast.forEach(person => {
+        acc.push(person)
+      })
+      return acc;
+    }, []);
+    const result = names.reduce((acc, name) => {
+      console.log(name)
+      console.log(!castJP.includes(name))
+      if (!castJP.includes(name)) {
         acc.push({
           name: name,
           nationality: humans[name].nationality,
           imdbStarMeterRating: humans[name].imdbStarMeterRating
-        });
+        })
       }
-      return acc;
     }, []);
     return result.sort((a, b) => {
-      return a.nationality.toLowerCase().localeCompare(b.nationality.toLowerCase());
+      a.nationality.toLowerCase().localeCompare(b.nationality.toLowerCase());
     });
+
+
+    // const result = humanNames.reduce((acc, name) => {
+    //   if (!acc.includes(humans[name])) {
+    //     acc.push({
+    //       name: name,
+    //       nationality: humans[name].nationality,
+    //       imdbStarMeterRating: humans[name].imdbStarMeterRating
+    //     });
+    //   }
+    //   return acc;
+    // }, []);
+    // return result.sort((a, b) => {
+    //   return a.nationality.toLowerCase().localeCompare(b.nationality.toLowerCase());
+    // });
 
     // Annotation:
     // output: array of objects with keys: name, nationality, imdbStarMeterRating
