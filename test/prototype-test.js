@@ -681,7 +681,7 @@ describe("PROTOTYPES", () => {
       })
     });
 
-    it.only("uncastActors", () => {
+    it("uncastActors", () => {
       const e = dinosaurPrompts.uncastActors();
 
       expect(e).to.deep.equal([{
@@ -705,7 +705,7 @@ describe("PROTOTYPES", () => {
       }])
     });
 
-    it("actorsAgesInMovies", () => {
+    it.only("actorsAgesInMovies", () => {
       const e = dinosaurPrompts.actorsAgesInMovies();
 
       expect(e).to.deep.equal([{

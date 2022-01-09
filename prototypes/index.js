@@ -1178,25 +1178,36 @@ const dinosaurPrompts = {
       }]
     */
     const names = Object.keys(humans);
+
     const castJP =  movies.reduce((acc, movie) => {
       movie.cast.forEach(person => {
-        acc.push(person)
-      })
+        if (!acc.includes(person)) {
+          acc.push(person);
+        }
+      });
       return acc;
     }, []);
+
     const result = names.reduce((acc, name) => {
-      console.log(name)
-      console.log(!castJP.includes(name))
-      if (!castJP.includes(name)) {
+      if (!castJP.includes(name) && acc.includes) {
         acc.push({
           name: name,
           nationality: humans[name].nationality,
           imdbStarMeterRating: humans[name].imdbStarMeterRating
-        })
+        });
       }
+      return acc;
     }, []);
     return result.sort((a, b) => {
-      a.nationality.toLowerCase().localeCompare(b.nationality.toLowerCase());
+      return a.nationality.toLowerCase().localeCompare(b.nationality.toLowerCase());
+
+      // aNationality = a.nationality.toLowerCase();
+      // bNationality = b.nationality.toLowerCase();
+      // if (aNationality > bNationality) {
+      //   return 1;
+      // } if (bNationality > aNationality) {
+      //   return -1;
+      // }
     });
 
 
@@ -1240,15 +1251,31 @@ const dinosaurPrompts = {
       { name: 'Bryce Dallas Howard', ages: [ 34, 37 ] } ]
     */
 
+    const names = movies.reduce((acc, movie) => {
+      // get array of names with no repeats
+    })
+
+    // need to fix the next two blocks 
+
     const result = movies.reduce((acc, movie) => {
       movie.cast.forEach(person => {
         if (!acc[person]) {
-          acc[person] = {name: person, ages: []};
+          acc.push({name: person, ages: []})
         }
-      });
-      console.log(acc);
+
+      })
       return acc;
-    }, []);
+    }, [])
+    result.forEach(item => {
+      movies.forEach(movie => {
+        movie.cast.forEach(person => {
+          if (person === item.name) {
+            item.ages.push(movie.yearReleased - humans[person].yearBorn)
+          }
+        })
+      })
+    })
+    console.log(result)
     return result;
 
     // Annotation:
