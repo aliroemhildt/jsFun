@@ -705,7 +705,7 @@ describe("PROTOTYPES", () => {
       }])
     });
 
-    it.only("actorsAgesInMovies", () => {
+    it("actorsAgesInMovies", () => {
       const e = dinosaurPrompts.actorsAgesInMovies();
 
       expect(e).to.deep.equal([{

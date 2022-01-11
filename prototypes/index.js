@@ -753,7 +753,6 @@ const turingPrompts = {
       cohortInfo[`cohort${cohort.cohort}`] = cohort.studentCount / teachers;
       return cohortInfo;
     }, {});
-    console.log(result);
     return result;
 
     // Annotation:
@@ -1252,30 +1251,27 @@ const dinosaurPrompts = {
     */
 
     const names = movies.reduce((acc, movie) => {
-      // get array of names with no repeats
-    })
-
-    // need to fix the next two blocks 
-
-    const result = movies.reduce((acc, movie) => {
-      movie.cast.forEach(person => {
-        if (!acc[person]) {
-          acc.push({name: person, ages: []})
+      movie.cast.forEach(name => {
+        if (!acc.includes(name)) {
+          acc.push(name);
         }
-
-      })
+      });
       return acc;
-    }, [])
-    result.forEach(item => {
+    }, []);
+
+    const result = names.reduce((acc, name) => {
+      item = ({name: name, ages: []});
       movies.forEach(movie => {
         movie.cast.forEach(person => {
-          if (person === item.name) {
-            item.ages.push(movie.yearReleased - humans[person].yearBorn)
+          if (person === name) {
+            item.ages.push(movie.yearReleased - humans[person].yearBorn);
           }
-        })
-      })
-    })
-    console.log(result)
+        });
+      });
+      acc.push(item);
+      return acc;
+    }, []);
+
     return result;
 
     // Annotation:
